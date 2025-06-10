@@ -38,128 +38,115 @@ Project Overview
 
 The Basic Banking System is a Java-based application with a graphical user interface (GUI) designed to manage bank accounts. It supports two types of accounts—Savings and Current—with distinct rules for deposits and withdrawals. The system ensures proper validation and error handling for user interactions.
 
-Features
+# Java Banking System (Console-Based)
 
+## Overview
+This is a simple Java-based banking system implemented as a console application. It supports **Savings** and **Current** accounts with distinct rules and provides core banking features like creating accounts, depositing money, withdrawing money, and checking balances. Account data is persistently stored in a file.
 
+---
 
+## Features
 
+- Create Savings and Current accounts  
+- Deposit money into accounts  
+- Withdraw money with balance constraints:
+  - Savings accounts require a minimum balance of 500  
+  - Current accounts allow overdraft up to -1000  
+- Check account balances  
+- File-based data persistence (`data/accounts.txt`)  
+- Robust input validation and error handling  
+- Modular code with Model, DAO, IO, and UI layers
 
-Deposit Money: Add funds to an account with input validation.
+---
 
+## Project Structure
 
+banking-system/
+├── src/
+│ ├── dao/ # Data Access Object classes
+│ ├── io/ # File handling classes
+│ ├── model/ # Account model classes
+│ ├── ui/ # Console user interface classes
+│ └── Main.java # Application entry point
+├── data/
+│ └── accounts.txt # Persistent storage file (auto-created)
+└── README.md
 
-Withdraw Money: Withdraw funds, adhering to account-specific rules (e.g., minimum balance for Savings, overdraft limit for Current).
+yaml
+Copy
+Edit
 
+---
 
+## Prerequisites
 
-Check Balance: View the current balance of an account.
+- Java Development Kit (JDK) 11 or higher installed  
+- Command line or IDE (e.g., IntelliJ IDEA, Eclipse) configured for Java development
 
+---
 
+## Setup & Running
 
-Account Types:
+1. **Compile** all Java source files, preserving the package structure:
+   ```bash
+   javac -d out src/model/*.java src/io/*.java src/dao/*.java src/ui/*.java src/Main.java
+Run the application:
 
+bash
+Copy
+Edit
+java -cp out Main
+Follow on-screen prompts to use the banking system features.
 
+Usage
+Upon start, you will see a menu with options:
 
+Create Account
 
+Deposit Money
 
-Savings Account: Requires a minimum balance of $100.
+Withdraw Money
 
+Check Balance
 
+Exit
 
-Current Account: Allows an overdraft limit of $500.
+Input the number corresponding to the action you want to perform.
 
+When creating an account, choose between Savings or Current account.
 
+Deposits and withdrawals require valid amounts and account IDs.
 
-GUI: Built using Swing for user-friendly interaction.
+The program validates input and displays errors for invalid entries.
 
-Project Structure
+Account IDs are auto-generated and shown after account creation.
 
+Design Notes
+Model Layer: Defines Account abstract class and concrete subclasses SavingsAccount and CurrentAccount implementing specific withdrawal rules.
 
+DAO Layer: Handles account data loading/saving using file I/O via FileHandler.
 
+UI Layer: Console-based interaction handled by ConsoleUI, managing menus and user input validation.
 
+Persistence: Accounts are saved in CSV format (accountId,accountType,balance) in data/accounts.txt.
 
-main/Main.java: Entry point of the application.
+Error Handling
+Input parsing errors (e.g., non-numeric input) prompt re-entry.
 
+Withdrawal checks prevent violating minimum balance or overdraft limits.
 
+File read/write errors are caught and reported without crashing the application.
 
-model/Account.java: Abstract class for accounts.
+Possible Future Improvements
+Add transaction history and statements.
 
+Implement login authentication for accounts.
 
+Switch to GUI-based interface using Swing or JavaFX.
 
-model/SavingsAccount.java: Savings account implementation.
+Add interest calculation for Savings accounts.
 
-
-
-model/CurrentAccount.java: Current account implementation.
-
-
-
-util/AccountStorage.java: Manages account data using a HashMap.
-
-
-
-ui/BankUI.java: GUI implementation using Swing.
-
-Setup Instructions
-
-
-
-
-
-Prerequisites:
-
-
-
-
-
-Java Development Kit (JDK) 8 or higher.
-
-
-
-An IDE like IntelliJ IDEA, Eclipse, or a simple text editor with a Java compiler.
-
-
-
-Clone the Repository (if applicable):
-
-git clone [your-repository-link]
-
-(Replace [your-repository-link] with the actual Git repository URL if available.)
-
-
-
-Compile and Run:
-
-
-
-
-
-Open the project in your IDE.
-
-
-
-Compile and run Main.java to launch the GUI.
-
-
-
-Alternatively, from the terminal:
-
-javac main/Main.java
-java main.Main
-
-Usage Guide
-
-
-
-
-
-Launch the Application:
-
-
-
-
-
-Run the program to open the GUI window titled "Basic Banking System."
+Encrypt stored account data for security.
 
 
 
